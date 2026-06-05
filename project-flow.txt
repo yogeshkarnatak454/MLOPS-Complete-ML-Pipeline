@@ -3,3 +3,7 @@ create a git hub repo and clone it in local (add experiments)
 add src folder along with all components (run them individually )
 add data ,models ,reports directories to .gitignore file
 now git add, commit , push
+setting up the pipelines (without params)
+create dvc.yaml gile and add stages to it
+dvc init then do dvc repro to test the pipeline automation (check dvc dag) it will visvalize the pipeline thori=ugh dvc dag
+now git add ,commmit ,push

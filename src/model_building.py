@@ -67,7 +67,7 @@ def load_data(file_path: str) -> pd.DataFrame:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
-def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> RandomForestClassifier:
+def build_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> RandomForestClassifier:
     """
     Train the RandomForest model.
     
@@ -85,16 +85,16 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> Rando
         random_state = params.get('random_state', 42)
         clf = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
         
-        logger.debug('Model training started with %d samples', X_train.shape[0])
+        logger.debug('Model building started with %d samples', X_train.shape[0])
         clf.fit(X_train, y_train)
-        logger.debug('Model training completed')
+        logger.debug('Model building completed')
         
         return clf
     except ValueError as e:
-        logger.error('ValueError during model training: %s', e)
+        logger.error('ValueError during model building: %s', e)
         raise
     except Exception as e:
-        logger.error('Error during model training: %s', e)
+        logger.error('Error during model building: %s', e)
         raise
 
 
@@ -121,12 +121,12 @@ def save_model(model, file_path: str) -> None:
 
 def main():
     try:
-        params = load_params('params.yaml')['model_training']
+        params = load_params('params.yaml')['model_building']
         train_data = load_data('./data/processed/train_tfidf.csv')
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values
 
-        clf = train_model(X_train, y_train, params)
+        clf = build_model(X_train, y_train, params)
         
         model_save_path = 'models/model.pkl'
         save_model(clf, model_save_path)
