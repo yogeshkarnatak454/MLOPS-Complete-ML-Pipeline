@@ -23,7 +23,19 @@ Expermients with DVC:
 17> Change params, re-run code (produce new experiments)
 18> Now git add, commit, push
 
+now time to cloud computing
+login to AWS console
+create an iam user (straight forward process)
+create s3 bucket (enter unique name and create)
 
+pip install dvc[s3]
+pip install awscli
+as i am using it straight so use it like that python -m awscli --version
+and python -m aws configure
+aws configure on terminal 
+dvc remote add -d dvcstore s3://bucketname
+dvc commit -push the exp outcome that you need or want to keep
+finally git add , commit ,push
 
 
 
